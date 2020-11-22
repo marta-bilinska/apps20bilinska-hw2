@@ -112,19 +112,19 @@ public class ImmutableLinkedList implements ImmutableList {
         ImmutableLinkedList newList = copy(this, 0, index);
         ImmutableLinkedList addedList = new ImmutableLinkedList(c);
         ImmutableLinkedList remainingList = copy(this, index, length);
-        Node last1;
+        Node last;
         int len = newList.length + addedList.length + remainingList.length;
         if (len < 1) {
             return new ImmutableLinkedList();
         }
-        Node bridge2 = addedList.getNode(c.length - 1);
+        Node bridge = addedList.getNode(c.length - 1);
         if (index < 1) {
             newList = addedList;
         } else {
-            last1 = newList.getNode(index - 1);
-            last1.setNext(addedList.head);
+            last = newList.getNode(index - 1);
+            last.setNext(addedList.head);
         }
-        bridge2.setNext(remainingList.head);
+        bridge.setNext(remainingList.head);
         newList.length = len;
         return newList;
     }
@@ -152,7 +152,7 @@ public class ImmutableLinkedList implements ImmutableList {
             return removeFirst();
         }
         if (index == length - 1) {
-            removeLast();
+            return removeLast();
         }
         ImmutableLinkedList newList = copy(this, 0, length);
         Node prev = newList.getNode(index - 1);
@@ -215,7 +215,8 @@ public class ImmutableLinkedList implements ImmutableList {
         return array;
     }
 
-    public static ImmutableLinkedList copy(ImmutableLinkedList list, int startIndex, int endIndex) {
+    public static ImmutableLinkedList copy(ImmutableLinkedList list,
+                                           int startIndex, int endIndex) {
         int listLength = list.length;
         if (!checkCopyingIndex(listLength, startIndex, endIndex)) {
             return new ImmutableLinkedList();

@@ -1,6 +1,5 @@
 package ua.edu.ucu.collections.immutable;
 
-import java.util.Arrays;
 
 public class ImmutableArrayList implements ImmutableList {
     private final Object[] elements;
@@ -45,12 +44,17 @@ public class ImmutableArrayList implements ImmutableList {
         int gapLength = c.length;
         Object[] newArray = new Object[length + gapLength];
 
-        if (startIndex >= 0) System.arraycopy(elements, 0, newArray, 0, startIndex);
+        if (startIndex >= 0) {
+            System.arraycopy(elements, 0, newArray,
+                    0, startIndex);
+        }
         System.arraycopy(c, 0, newArray, startIndex, gapLength);
 
-        if (length - startIndex >= 0)
-            System.arraycopy(elements, startIndex, newArray, startIndex + gapLength,
+        if (length - startIndex >= 0) {
+            System.arraycopy(elements, startIndex, newArray,
+                    startIndex + gapLength,
                     length - startIndex);
+        }
         return new ImmutableArrayList(newArray);
     }
 
