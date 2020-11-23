@@ -75,6 +75,24 @@ public class ImmutableLinkedListTest {
     }
 
     @Test
+    public void testAddAllArrayOfOne() {
+        ImmutableLinkedList immutableLinkedLis = new ImmutableLinkedList(arrayOfOne);
+        ImmutableLinkedList result = immutableLinkedLis.addAll(emptyArray);
+        int actualLength = 1;
+        int expLength = result.size();
+        assertEquals(actualLength, expLength);
+    }
+
+    @Test
+    public void testAddAllArrayEmpty() {
+        ImmutableLinkedList immutableLinkedLis = new ImmutableLinkedList();
+        ImmutableLinkedList result = immutableLinkedLis.addAll(emptyArray);
+        int actualLength = 0;
+        int expLength = result.size();
+        assertEquals(actualLength, expLength);
+    }
+
+    @Test
     public void testAddArrayOfMany() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
         ImmutableLinkedList result = immutableLinkedList.add(2);
@@ -118,6 +136,7 @@ public class ImmutableLinkedListTest {
         Object expElement = result.get(1);
         assertEquals(actualElement, expElement);
     }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void testSetAverageArrayException() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
@@ -175,6 +194,7 @@ public class ImmutableLinkedListTest {
         assertEquals(actual, exp);
 
     }
+
     @Test
     public void testIsNotEmpty() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
@@ -258,6 +278,7 @@ public class ImmutableLinkedListTest {
         ImmutableLinkedList result = immutableLinkedLis.addAll(10, arrayOfOne);
 
     }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveException() {
         ImmutableLinkedList immutableLinkedLis = new ImmutableLinkedList();
@@ -281,6 +302,7 @@ public class ImmutableLinkedListTest {
         int expLength = result.length;
         assertEquals(actualLength, expLength);
     }
+
     @Test
     public void testToArrayAverage() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
@@ -289,17 +311,29 @@ public class ImmutableLinkedListTest {
         int expLength = result.length;
         assertEquals(actualLength, expLength);
     }
+
     @Test
     public void testToStringAverage() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
         String result = immutableLinkedList.toString();
         assertEquals("1, 10, 3, -1", result);
     }
+
     @Test
     public void testToStringEmpty() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
         String result = immutableLinkedList.toString();
         assertEquals("", result);
+    }
+
+    @Test
+    public void testCopyException() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
+        ImmutableLinkedList immutableLinkedList1 = immutableLinkedList.copy(1, 0);
+        int actualLength = 0;
+        int expLength = immutableLinkedList1.size();
+        assertEquals(actualLength, expLength);
+
     }
 
 }

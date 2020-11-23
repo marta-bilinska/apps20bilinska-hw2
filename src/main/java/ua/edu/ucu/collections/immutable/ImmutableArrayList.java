@@ -78,11 +78,9 @@ public class ImmutableArrayList implements ImmutableList {
     public ImmutableList remove(int index) {
         checkIndex(index);
         Object[] newArray = new Object[length - 1];
-
-        ImmutableArrayList newImmutable = new ImmutableArrayList();
         System.arraycopy(elements, 0, newArray, 0, index);
-        System.arraycopy(elements, index + 1, newArray, index, length - index);
-        return newImmutable.add(newArray);
+        System.arraycopy(elements, index + 1, newArray, index, length - index - 1);
+        return new ImmutableArrayList(newArray);
     }
 
     @Override

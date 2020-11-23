@@ -60,6 +60,12 @@ public class ImmutableArrayListTest {
         assertEquals(actualLength, expLength);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddNegativeIndexArrayOfMany() {
+        ImmutableList immutableArrayList = new ImmutableArrayList(averageArray);
+        ImmutableList result = immutableArrayList.add(-5, 2);
+    }
+
     @Test
     public void testAddArrayEmpty() {
         ImmutableList immutableArrayList = new ImmutableArrayList();
@@ -72,9 +78,9 @@ public class ImmutableArrayListTest {
     @Test
     public void testGetAverageArray() {
         ImmutableList immutableArrayList = new ImmutableArrayList(averageArray);
-        ImmutableList result = immutableArrayList.add(2);
+        ImmutableList result = immutableArrayList.add(0, 2);
         Object actualElement = 2;
-        Object expElement = result.get(4);
+        Object expElement = result.get(0);
         assertEquals(actualElement, expElement);
     }
 
@@ -177,31 +183,15 @@ public class ImmutableArrayListTest {
     public void testRemoveEmptyArray() {
         ImmutableList immutableArrayList = new ImmutableArrayList();
         ImmutableList result = immutableArrayList.remove(1);
-
-        Object actualElement3 = 1;
         Object expElement3 = result.get(0);
-
-        Object actualElement5 = 3;
-        Object expElement5 = result.get(1);
-        int actualLength = 2;
-        int expLength = result.size();
-
-        assertEquals(actualElement3, expElement3);
-        assertEquals(actualElement5, expElement5);
-        assertEquals(actualLength, expLength);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testRemoveAverageArray() {
         ImmutableList immutableArrayList = new ImmutableArrayList(averageArray);
         ImmutableList result = immutableArrayList.remove(1);
-
-        Object actualElement = 1;
-        Object expElement = result.get(1);
         int actualLength = 3;
         int expLength = result.size();
-
-        assertEquals(actualElement, expElement);
         assertEquals(actualLength, expLength);
     }
 
@@ -251,6 +241,7 @@ public class ImmutableArrayListTest {
         assertEquals(actualLength, expLength);
         assertTrue(result.isEmpty());
     }
+
     @Test
     public void testToArray() {
         ImmutableList immutableArrayList = new ImmutableArrayList(averageArray);
@@ -264,6 +255,7 @@ public class ImmutableArrayListTest {
         String result = immutableArrayList.toString();
         assertEquals("1, 10, 3, -1", result);
     }
+
     @Test
     public void testToStringEmpty() {
         ImmutableArrayList immutableArrayList = new ImmutableArrayList();
