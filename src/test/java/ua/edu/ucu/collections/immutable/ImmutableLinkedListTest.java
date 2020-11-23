@@ -71,6 +71,12 @@ public class ImmutableLinkedListTest {
         assert (expLast == null);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetNode() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(arrayOfOne);
+        Object expLast = immutableLinkedList.getNode(1);
+    }
+
     @Test
     public void testAddArrayOfOne() {
         ImmutableLinkedList immutableLinkedLis = new ImmutableLinkedList(arrayOfOne);

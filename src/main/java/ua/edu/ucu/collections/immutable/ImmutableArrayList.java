@@ -50,7 +50,7 @@ public class ImmutableArrayList implements ImmutableList {
         }
         System.arraycopy(c, 0, newArray, startIndex, gapLength);
 
-        if (length - startIndex >= 0) {
+        if (length - startIndex > 0) {
             System.arraycopy(elements, startIndex, newArray,
                     startIndex + gapLength,
                     length - startIndex);
