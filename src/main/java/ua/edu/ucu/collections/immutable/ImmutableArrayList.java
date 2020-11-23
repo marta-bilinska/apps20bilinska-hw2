@@ -30,16 +30,16 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList add(Object e) {
+    public ImmutableArrayList add(Object e) {
         return add(length, e);
     }
 
     @Override
-    public ImmutableList add(int index, Object e) {
+    public ImmutableArrayList add(int index, Object e) {
         return insertValues(index, new Object[]{e});
     }
 
-    public ImmutableList insertValues(int startIndex, Object[] c) {
+    public ImmutableArrayList insertValues(int startIndex, Object[] c) {
         checkAddingIndex(startIndex);
         int gapLength = c.length;
         Object[] newArray = new Object[length + gapLength];
@@ -59,12 +59,12 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList addAll(Object[] c) {
+    public ImmutableArrayList addAll(Object[] c) {
         return insertValues(length, c);
     }
 
     @Override
-    public ImmutableList addAll(int index, Object[] c) {
+    public ImmutableArrayList addAll(int index, Object[] c) {
         return insertValues(index, c);
     }
 
@@ -75,7 +75,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList remove(int index) {
+    public ImmutableArrayList remove(int index) {
         checkIndex(index);
         Object[] newArray = new Object[length - 1];
         System.arraycopy(elements, 0, newArray, 0, index);
@@ -85,7 +85,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList set(int index, Object e) {
+    public ImmutableArrayList set(int index, Object e) {
         Object[] newArray = new Object[length];
         System.arraycopy(elements, 0, newArray, 0, length);
         newArray[index] = e;
@@ -108,7 +108,7 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList clear() {
+    public ImmutableArrayList clear() {
         return new ImmutableArrayList();
     }
 
