@@ -5,49 +5,6 @@ public class ImmutableLinkedList implements ImmutableList {
     private final Node head;
     private int length;
 
-    private static class Node {
-        private Node next = null;
-        private Object data = null;
-
-        Node(Object value) {
-            data = value;
-        }
-
-        Node() {
-
-        }
-
-        public void setNext(Node n) {
-            next = n;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setData(Object value) {
-            data = value;
-        }
-
-        public boolean hasNext() {
-            return next != null;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Node) {
-                return this.data.equals(((Node) obj).data);
-            }
-            return this.data.equals(obj);
-        }
-
-        @Override
-        public int hashCode() {
-            return data.hashCode();
-        }
-
-    }
-
     public ImmutableLinkedList() {
         head = null;
         length = 0;
@@ -82,7 +39,7 @@ public class ImmutableLinkedList implements ImmutableList {
 
     public Object checkNode(Node node) {
         if (node != null) {
-            return node.data;
+            return node.getData();
         } else {
             return null;
         }
@@ -110,16 +67,13 @@ public class ImmutableLinkedList implements ImmutableList {
     @Override
     public ImmutableLinkedList addAll(int index, Object[] c) {
         if (c.length < 1) {
-            return this;
+            return copy(0, length);
         }
         ImmutableLinkedList newList = copy(0, index);
         ImmutableLinkedList addedList = new ImmutableLinkedList(c);
         ImmutableLinkedList remainingList = copy(index, length);
         Node last;
         int len = newList.length + addedList.length + remainingList.length;
-        if (len < 1) {
-            return new ImmutableLinkedList();
-        }
         Node bridge = addedList.getNode(c.length - 1);
         if (index < 1) {
             newList = addedList;
@@ -145,7 +99,7 @@ public class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        return getNode(index).data;
+        return getNode(index).getData();
     }
 
     @Override
@@ -212,7 +166,7 @@ public class ImmutableLinkedList implements ImmutableList {
         Node current = head;
         int i = 0;
         while (current != null) {
-            array[i] = current.data;
+            array[i] = current.getData();
             current = current.getNext();
         }
         return array;
@@ -230,11 +184,11 @@ public class ImmutableLinkedList implements ImmutableList {
             currentIndex += 1;
         }
 
-        Node newHead = new Node(current.data);
+        Node newHead = new Node(current.getData());
         Node resultCurrent = newHead;
         while (current.hasNext() && currentIndex < endIndex) {
             current = current.getNext();
-            resultCurrent.setNext(new Node(current.data));
+            resultCurrent.setNext(new Node(current.getData()));
             resultCurrent = resultCurrent.getNext();
             currentIndex += 1;
         }
@@ -275,11 +229,11 @@ public class ImmutableLinkedList implements ImmutableList {
         if (current == null) {
             return "";
         }
-        result.append(current.data);
+        result.append(current.getData());
         while (current.hasNext()) {
             result.append(", ");
             current = current.getNext();
-            result.append(current.data);
+            result.append(current.getData());
         }
         return result.toString();
     }

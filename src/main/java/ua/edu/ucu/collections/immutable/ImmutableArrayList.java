@@ -79,7 +79,8 @@ public class ImmutableArrayList implements ImmutableList {
         checkIndex(index);
         Object[] newArray = new Object[length - 1];
         System.arraycopy(elements, 0, newArray, 0, index);
-        System.arraycopy(elements, index + 1, newArray, index, length - index - 1);
+        System.arraycopy(elements, index + 1, newArray,
+                index, length - index - 1);
         return new ImmutableArrayList(newArray);
     }
 

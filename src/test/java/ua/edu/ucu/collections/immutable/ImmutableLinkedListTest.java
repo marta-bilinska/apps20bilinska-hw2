@@ -179,6 +179,22 @@ public class ImmutableLinkedListTest {
     }
 
     @Test
+    public void testIndexOfEmpty() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList();
+        int actual = -1;
+        int exp = immutableLinkedList.indexOf(3);
+        assertEquals(actual, exp);
+    }
+
+    @Test
+    public void testIndexOfNode() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
+        int actual = 2;
+        int exp = immutableLinkedList.indexOf(new Node(3));
+        assertEquals(actual, exp);
+    }
+
+    @Test
     public void testIndexOfException() {
         ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
         int actual = -1;
@@ -213,6 +229,7 @@ public class ImmutableLinkedListTest {
         boolean exp1 = immutableLinkedList.isEmpty();
         assertEquals(actual1, exp1);
     }
+
 
     @Test
     public void testAddIndexArrayOfOne() {
@@ -250,6 +267,7 @@ public class ImmutableLinkedListTest {
         int expLength = result.size();
         assertEquals(actualLength, expLength);
     }
+
 
     @Test
     public void testAddIndexArrayOfMany() {
@@ -295,6 +313,15 @@ public class ImmutableLinkedListTest {
     }
 
     @Test
+    public void testRemoveMiddleArrayOfMany() {
+        ImmutableLinkedList immutableLinkedList = new ImmutableLinkedList(averageArray);
+        ImmutableLinkedList result = immutableLinkedList.remove(1);
+        Object expElement = 3;
+        Object actualElement = result.get(1);
+        assertEquals(expElement, actualElement);
+    }
+
+    @Test
     public void testToArrayEmpty() {
         ImmutableLinkedList immutableLinkedLis = new ImmutableLinkedList();
         Object[] result = immutableLinkedLis.toArray();
@@ -335,5 +362,16 @@ public class ImmutableLinkedListTest {
         assertEquals(actualLength, expLength);
 
     }
+
+    @Test
+    public void testHashCode() {
+        Node nodeFirst = new Node(2);
+        Node nodeSecond = new Node(2);
+        int hashFirst = nodeFirst.hashCode();
+        int hashSecond = nodeSecond.hashCode();
+        assertEquals(hashFirst, hashSecond);
+
+    }
+
 
 }
