@@ -349,6 +349,7 @@ public class ImmutableLinkedListTest {
         int actualLength = 4;
         int expLength = result.length;
         assertEquals(actualLength, expLength);
+        assertArrayEquals(averageArray, result);
     }
 
     @Test

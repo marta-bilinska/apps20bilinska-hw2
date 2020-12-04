@@ -168,6 +168,7 @@ public class ImmutableLinkedList implements ImmutableList {
         while (current != null) {
             array[i] = current.getData();
             current = current.getNext();
+            i += 1;
         }
         return array;
     }
